@@ -1,0 +1,33 @@
+.step-component {
+  max-width: 70%;
+
+  padding: 0.5rem;
+
+  h5 {
+    font-size: 2rem;
+    text-align: center;
+
+    max-width: 650px;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+  }
+
+  .answers {
+    margin: 1rem 0;
+    
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .actions {
+    margin-top: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
