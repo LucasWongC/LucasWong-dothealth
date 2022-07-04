@@ -16,7 +16,7 @@
 
   .answers {
     margin: 1rem 0;
-    
+
     display: flex;
     flex-direction: column;
 
@@ -29,5 +29,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    gap: 10px;
   }
 }

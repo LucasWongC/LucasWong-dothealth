@@ -1,7 +1,7 @@
 button {
   background-color: var(--theme-color);
 
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--text-color);
 
   padding: 0.5rem 1.5rem;
@@ -20,5 +20,9 @@ button {
 
   &:active {
     filter: brightness(0.8);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 }
