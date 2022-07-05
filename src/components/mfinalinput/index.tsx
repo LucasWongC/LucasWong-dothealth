@@ -1,5 +1,7 @@
 import './mfinalinput.scss';
 
+import { ReactComponent as CheckIcon } from 'assets/check.svg';
+
 interface Props {
   content: string;
   checked?: boolean;
@@ -17,6 +19,7 @@ const MFinalInput: React.FC<Props> = ({
       onClick={onClick}
     >
       {content}
+      {checked && <CheckIcon />}
     </div>
   );
 };

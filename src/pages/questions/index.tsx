@@ -2,33 +2,43 @@ import React, { useState } from 'react';
 
 import { questions } from 'data/mockup';
 import Step from './step';
+import MSpinner from 'components/mspinner';
 
 const Questions = () => {
-  const [curStep, setCurStep] = useState(0);
-  const [submitAnswer, setSubmitAnswer] = useState({});
+  const [info, setInfo] = useState({ step: 0, answers: {} });
+  const [loading, setLoading] = useState(false);
 
   const handlePrev = () => {
-    if (curStep !== 0) {
-      setCurStep((prev) => prev - 1);
+    if (info.step !== 0) {
+      setInfo((prev) => ({ ...prev, step: prev.step - 1 }));
     }
   };
 
   const handleNext = (data: Object, step = 1) => {
-    setSubmitAnswer((prev) => ({ ...prev, ...data }));
+    setInfo((prev) => ({ ...prev, answers: { ...prev.answers, ...data } }));
 
-    if (curStep === questions.length - 1) {
+    if (info.step === questions.length - 1) {
+      setLoading(true);
+
+      console.log(info);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     } else {
-      setCurStep((prev) => prev + step);
+      setInfo((prev) => ({ ...prev, step: prev.step + 1 }));
     }
   };
 
   return (
     <>
+      {loading && <MSpinner />}
       <Step
-        {...questions[curStep]}
+        {...questions[info.step]}
         onSubmit={handleNext}
         onPrev={handlePrev}
-        info={submitAnswer}
+        info={info}
+        length={questions.length}
       />
     </>
   );

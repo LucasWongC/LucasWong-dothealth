@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 interface Props {
   question: string;
   answers: string[];
+  type?: string;
+  length: number;
   info: any;
   onPrev: () => void;
   onSubmit: (data: Object, step?: number) => void;
@@ -21,7 +23,9 @@ type CheckType = {
 const Step: React.FC<Props> = ({
   question,
   answers,
+  type = 'single',
   info,
+  length,
   onSubmit,
   onPrev,
   ...props
@@ -33,7 +37,7 @@ const Step: React.FC<Props> = ({
   };
 
   const handleNext = () => {
-    if (Object.keys(checked).length === 0) {
+    if (Object.values(checked).filter((i) => i === true).length === 0) {
       return;
     }
 
@@ -44,7 +48,10 @@ const Step: React.FC<Props> = ({
     const id = ind.toString();
 
     setChecked((prev: CheckType) => {
-      const temp = { ...prev };
+      let temp: CheckType = {};
+      if (type === 'multi') {
+        temp = { ...prev };
+      }
       if (temp[id] === undefined) temp[id] = false;
       temp[id] = !temp[id];
       return temp;
@@ -52,7 +59,7 @@ const Step: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    setChecked(info[question] ?? {});
+    setChecked(info.answers[question] ?? {});
   }, [question, info]);
 
   return (
@@ -69,8 +76,14 @@ const Step: React.FC<Props> = ({
         ))}
       </div>
       <div className='actions'>
-        <MButton title='Back' onClick={() => handlePrev()} />
-        <MButton title='Next' onClick={() => handleNext()} />
+        {info.step !== 0 && (
+          <MButton title='Back' onClick={() => handlePrev()} />
+        )}
+
+        <MButton
+          title={info.step === length - 1 ? 'Submit' : 'Next'}
+          onClick={() => handleNext()}
+        />
       </div>
     </div>
   );

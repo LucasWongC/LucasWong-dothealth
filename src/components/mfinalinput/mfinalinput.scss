@@ -1,4 +1,6 @@
 .final-input {
+  position: relative;
+
   border-radius: 5px;
   border-width: 2px;
 
@@ -8,7 +10,21 @@
 
   cursor: pointer;
 
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in;
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    path {
+      fill: var(--theme-color);
+    }
+
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 10px);
+  }
+
   &:hover {
     border-color: var(--theme-color);
     filter: brightness(1.3);

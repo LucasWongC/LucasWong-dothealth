@@ -3,6 +3,7 @@ export const questions = [
     question:
       'Are you looking to manage your health or the health of someone else?',
     answers: ['My own', 'My parent(s)', 'My child(ren)', 'My partner'],
+    type: 'multi',
   },
   {
     question:
